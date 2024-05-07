@@ -1,10 +1,9 @@
 <script setup lang="ts">
- const authStore = useAuthStore()
 
 </script>
 
 <template>
-<main class="h-dvh w-dvw">
+<main class="w-dvw h-dvh">
   <Login/>
 </main>
 </template>

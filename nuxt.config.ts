@@ -4,13 +4,16 @@ export default defineNuxtConfig({
   modules: [
     '@pinia/nuxt',
     '@pinia-plugin-persistedstate/nuxt',
+    'nuxt-headlessui',
+    "@nuxtjs/tailwindcss"
   ],
   //@ts-ignore
   piniaPersistedstate: {
     cookieOptions: {
       sameSite: 'strict',
-      htttOnly: true,
+      httpOnly: true,
     },
     storage: 'cookies',
   },
+  css: ['~/assets/css/main.css'],
 })

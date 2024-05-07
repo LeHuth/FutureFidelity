@@ -1,11 +1,10 @@
 <script setup lang="ts">
- const authStore = useAuthStore()
 
 </script>
 
 <template>
-<main class="h-dvh w-dvw">
-  <Login/>
+<main>
+  <SignUp/>
 </main>
 </template>
 
