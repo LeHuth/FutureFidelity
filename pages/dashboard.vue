@@ -4,11 +4,17 @@ import {definePageMeta} from "#imports";
 definePageMeta({
   middleware: 'auth'
 })
+
+const authStore = useAuthStore()
+
 </script>
 
 <template>
 <div>
     <h1>Dashboard</h1>
+  <p>
+    {{authStore.token}}
+  </p>
 </div>
 </template>
 

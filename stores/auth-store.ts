@@ -21,6 +21,18 @@ export const useAuthStore = defineStore('auth', {
             this.user = null
         }
     },
+    getters:{
+        isAuthenticated(): boolean{
+            return this.token !== ''
+        },
+        getTokens() : {token: string, refreshToken: string}{
+            return {
+                token: this.token,
+                refreshToken: this.refreshToken
+            }
+        }
+
+    },
     persist: {
         storage: persistedState.cookiesWithOptions({
             sameSite: 'strict',

@@ -5,6 +5,7 @@ const data = ref({
 })
 
 const router = useRouter()
+const authStore = useAuthStore()
 
 const submit = (e:MouseEvent) => {
   e.preventDefault()
@@ -18,10 +19,15 @@ const submit = (e:MouseEvent) => {
       password: data.value.password,
     })
   }).then(response => {
+    if(!response.ok) {
+      throw new Error('Network response was not ok')
+    }
     response.json().then(data => {
       console.log(data)
+      authStore.setToken(data.access)
+      authStore.setRefreshToken(data.refresh)
+      router.push('/dashboard')
     })
-    router.push('/dashboard')
   }).catch(error => {
     console.error(error)
   })
