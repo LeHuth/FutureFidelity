@@ -16,4 +16,8 @@ export default defineNuxtConfig({
     storage: 'cookies',
   },
   css: ['~/assets/css/main.css'],
+
+  tailwindcss: {
+    configPath: '~/tailwind.config.js',
+  }
 })
