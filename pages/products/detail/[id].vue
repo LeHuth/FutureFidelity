@@ -299,6 +299,8 @@ const addToCart = () => {
     name: data.value.name,
     price: data.value.price,
     image: data.value.image,
+    stock: data.value.stock,
+    quantity: 1
   })
 }
 </script>

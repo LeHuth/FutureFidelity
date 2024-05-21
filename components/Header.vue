@@ -49,7 +49,9 @@
                     <button type="submit" class="w-full rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50">Checkout</button>
 
                     <p class="mt-6 text-center">
-                      <a href="#" class="text-sm font-medium text-indigo-600 hover:text-indigo-500">View Shopping Bag</a>
+                      <nuxt-link to="/cart">
+                        <a class="text-sm font-medium text-indigo-600 hover:text-indigo-500">View Shopping Bag</a>
+                      </nuxt-link>
                     </p>
                   </form>
                   <p v-else class="text-center text-md">
