@@ -1,18 +1,32 @@
 import { useAuthStore } from '~/stores/auth-store'
 import {jwtVerify} from "jose";
 export default defineNuxtRouteMiddleware(async () => {
+    console.log('########################## Middleware Auth ##########################')
     const authStore = useAuthStore()
     if(authStore.token === ''){
         return navigateTo('/login')
     }
+    console.log('--------- Auth Store ---------')
+    console.log('authStore.token', authStore.token)
+    console.log('authStore.refreshToken', authStore.refreshToken)
+    console.log('--------- end end ---------')
+
+
     const res = await $fetch('/api/verify', {
         method: 'post',
-        body: JSON.stringify({token: authStore.token}),
+        body: JSON.stringify({token: authStore.token, refreshToken: authStore.refreshToken}),
     })
-
-    if(!res){
+    console.log('myauth.ts - RESULT: ',res)
+    if(!res.ok){
         return navigateTo('/login')
     }
+
+    if(res.ok){
+        console.log(res.access, res.refresh)
+        authStore.setToken(res.access)
+        authStore.setRefreshToken(res.refresh)
+    }
+    console.log('########################## END END ##########################')
 
     /*if(process.server){
         console.log('Server side')

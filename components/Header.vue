@@ -9,15 +9,13 @@
       </nuxt-link>
 
       <div class="flex justify-end">
-        <a href="#" class="ml-6 hidden p-2 text-gray-400 hover:text-gray-500 lg:block">
+        <a href="#" class="mr-4 hidden p-2 text-gray-400 hover:text-gray-500 lg:block">
           <span class="sr-only">Search</span>
           <MagnifyingGlassIcon class="h-6 w-6" aria-hidden="true" />
         </a>
         <!-- Account -->
-        <a href="#" class="p-2 text-gray-400 hover:text-gray-500 lg:ml-4">
-          <span class="sr-only">Account</span>
-          <UserIcon class="h-6 w-6" aria-hidden="true" />
-        </a>
+        <AccountPopover v-if="status === 'authenticated'"/>
+        <button @click="navigateTo('/login/')" v-else class="btn btn-sm btn-outline">log in</button>
         <!-- Cart -->
           <a id="cart-icon" href="#" class="p-2 cursor-default text-gray-400 lg:ml-4">
             <Popover class="flow-root text-sm lg:relative">
@@ -108,6 +106,7 @@
 import { ref } from 'vue'
 import { Dialog, DialogPanel, Popover, PopoverPanel, PopoverButton } from '@headlessui/vue'
 import { XMarkIcon, MagnifyingGlassIcon, ShoppingBagIcon, UserIcon, TrashIcon } from '@heroicons/vue/24/outline'
+import AccountPopover from "~/components/AccountPopover.vue";
 
 
 const navigation = [
@@ -118,7 +117,7 @@ const navigation = [
 ]
 
 const cartStore = useCartStore()
-
+const { status, signOut } = useAuth()
 const products = cartStore.getCart
 console.log(products)
 const mobileMenuOpen = ref(false)

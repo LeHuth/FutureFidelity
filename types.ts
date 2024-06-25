@@ -58,3 +58,36 @@ export interface productInterface {
     stock: number;
     quantity: number;
 }
+
+export interface verifyInterface {
+    access: string;
+    refresh: string;
+    ok: boolean;
+}
+
+export interface meInterface {
+    id: number
+    password: string
+    last_login: string
+    is_superuser: boolean
+    username: string
+    first_name: string
+    last_name: string
+    email: string
+    is_staff: boolean
+    is_active: boolean
+    date_joined: string
+    isSuspended: boolean
+    phone: string
+    street: string
+    city: string
+    state: string
+    country: string
+    postal_code: string
+    about: string
+    created_at: string
+    updated_at: string
+    photo: string
+    groups: []
+    user_permissions: []
+}

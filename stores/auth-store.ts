@@ -33,9 +33,9 @@ export const useAuthStore = defineStore('auth', {
         }
 
     },
-    persist: {
+/*    persist: {
         storage: persistedState.cookiesWithOptions({
             sameSite: 'strict',
         }),
-    },
+    },*/
 })
