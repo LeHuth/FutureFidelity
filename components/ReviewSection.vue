@@ -37,9 +37,9 @@
 
         <div class="mt-10">
           <h3 class="text-lg font-medium text-gray-900">Share your thoughts</h3>
-          <p class="mt-1 text-sm text-gray-600">If you’ve used this product, share your thoughts with other customers</p>
-
-          <a href="#" class="mt-6 inline-flex w-full items-center justify-center rounded-md border border-gray-300 bg-white px-8 py-2 text-sm font-medium text-gray-900 hover:bg-gray-50 sm:w-auto lg:w-full">Write a review</a>
+          <p class="mt-1 mb-6 text-sm text-gray-600">If you’ve used this product, share your thoughts with other customers</p>
+          <WriteRating :productId="props.productId" class=""/>
+<!--          <a href="#" class="mt-6 inline-flex w-full items-center justify-center rounded-md border border-gray-300 bg-white px-8 py-2 text-sm font-medium text-gray-900 hover:bg-gray-50 sm:w-auto lg:w-full">Write a review</a>-->
         </div>
       </div>
 
@@ -48,7 +48,11 @@
 
         <div class="flow-root">
           <div class="-my-12 divide-y divide-gray-200">
-            <div v-for="review in reviews.featured" :key="review.id" class="py-12">
+            <div v-for="review in realReviews">
+              <RatingWrapper :review="review"/>
+            </div>
+
+<!--            <div v-for="review in reviews.featured" :key="review.id" class="py-12">
               <div class="flex items-center">
                 <img :src="review.avatarSrc" :alt="`${review.author}.`" class="h-12 w-12 rounded-full" />
                 <div class="ml-4">
@@ -61,7 +65,7 @@
               </div>
 
               <div class="mt-4 space-y-6 text-base italic text-gray-600" v-html="review.content" />
-            </div>
+            </div>-->
           </div>
         </div>
       </div>
@@ -71,6 +75,17 @@
 
 <script setup>
 import { StarIcon } from '@heroicons/vue/20/solid'
+import WriteRating from "~/components/Rating/WriteRating.vue";
+const props = defineProps({
+  productId: {
+    type: String,
+    required: true
+  }
+})
+
+const response = await fetch(`http://localhost:8000/api/products/product/reviews/?id=${props.productId}`)
+const realReviews = await response.json()
+
 
 const reviews = {
   average: 4,

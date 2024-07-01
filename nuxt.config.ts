@@ -1,4 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import Vue from 'vue'
 export default defineNuxtConfig({
     devtools: {enabled: true},
     modules: [
@@ -10,12 +11,9 @@ export default defineNuxtConfig({
         "@nuxt/image",
         '@nuxtjs/color-mode'
     ],
-    colorMode: {
-        preference: 'light', // default theme
-        dataValue: 'theme', // activate data-theme in <html> tag
-        classSuffix: '',
-        storageKey: 'nuxt-color-mode'
-    },
+    plugins: [
+        /*{ src: '~/plugins/tinymce.client.ts', mode: 'client' }*/
+    ],
 
     auth: {
         globalAppMiddleware: true,
@@ -46,7 +44,7 @@ export default defineNuxtConfig({
             enableRefreshOnWindowFocus: true,     // Refetch user session every time when browser tab will be focused
         }
 
-    },
+    },/*
     routeRules: {
         '/with-caching': {
             swr: 86400000,
@@ -54,7 +52,7 @@ export default defineNuxtConfig({
                 disableServerSideAuth: true
             }
         }
-    },
+    },*/
 
 
     //@ts-ignore
@@ -69,5 +67,5 @@ export default defineNuxtConfig({
 
     tailwindcss: {
         configPath: '~/tailwind.config.js',
-    }
+    },
 })

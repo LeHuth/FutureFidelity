@@ -162,45 +162,25 @@
             </div>
           </div>
         </section>
-        <ReviewSection/>
+        <ReviewSection :productId="productId"/>
       </div>
     </main>
   </div>
 </template>
 
 <script setup lang="ts">
+import Editor from '@tinymce/tinymce-vue'
 import { ref } from 'vue'
 import {
-  Dialog,
-  DialogPanel,
-  Disclosure,
-  DisclosureButton,
-  DisclosurePanel,
-  Popover,
-  PopoverButton,
-  PopoverGroup,
-  PopoverPanel,
-  RadioGroup,
-  RadioGroupLabel,
-  RadioGroupOption,
   Tab,
   TabGroup,
   TabList,
   TabPanel,
   TabPanels,
-  TransitionChild,
-  TransitionRoot,
     provideUseId,
 } from '@headlessui/vue'
 import {
-  Bars3Icon,
   HeartIcon,
-  MagnifyingGlassIcon,
-  MinusIcon,
-  PlusIcon,
-  ShoppingBagIcon,
-  UserIcon,
-  XMarkIcon,
 } from '@heroicons/vue/24/outline'
 import { StarIcon } from '@heroicons/vue/20/solid'
 import type {productDetailInterface} from "~/types";
@@ -209,8 +189,11 @@ import type {productDetailInterface} from "~/types";
 
 provideUseId(()=>useId())
 const productDetail = ref<productDetailInterface | null>(null)
+const router = useRouter()
 
-const {data, error } = useFetch<productDetailInterface>('http://localhost:8000/api/products/vinyls/get/5',{
+console.log(router.currentRoute.value)
+const productId = router.currentRoute.value.path.split('/')[3]
+const {data, error } = useFetch<productDetailInterface>(`http://localhost:8000/api/products/vinyls/get/${productId}`,{
   method:'get',
 })
 if (error.value) console.log('ERROR from useFetch: ', error.value)
